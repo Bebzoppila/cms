@@ -15,10 +15,10 @@
         $uploadFile = "../../images/slider/".$fileName.".jpg";
         $filePath = "/images/slider/".$fileName.".jpg";
         $sql = "INSERT INTO `$_POST[tableName]` (`title`, `img`) VALUES ('$_POST[title]', '$filePath');";
-        $db->sthExecute($sql);
-        echo json_encode('');
+        $res = $db->sthExecute($sql);
+        echo json_encode(['id' => $db->getLastId()]);
         if(move_uploaded_file($_FILES['img']['tmp_name'], $uploadFile)){
-            echo 'Загрузилось';
+//            echo 'Загрузилось';
         };
 //        echo json_encode($_FILES['img']);
 //        Files::loadFile('img', "slider/$imgName");

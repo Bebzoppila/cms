@@ -1,19 +1,18 @@
 <?php
-    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    $segments = explode('/', trim($uri, '/'));
+    include_once 'Router.php';
+    include_once 'controllers/AdminController.php';
+    include_once 'controllers/MainController.php';
+    include_once 'controllers/ApiController.php';
 
-    switch ($segments[0]){
-        case 'admin':{
-            $allUrls = ['create-field' => 'createField', 'add-data' => 'addData'];
-            $filename = $allUrls[$segments[1]] ? : 'index';
-            include_once "admin/$filename.php";
-            break;
-        }
-        case '':{
-            include_once 'frontend/index.php';
-            break;
-        }
+    Router::GET('/', ['class' => 'MainController', 'method' => 'index']);
 
-    }
 
+    Router::GET('/admin/', ['class' => 'AdminController', 'method' => 'index']);
+    Router::GET('/admin/create/', ['class' => 'AdminController', 'method' => 'create']);
+    Router::GET('/admin/add-data/', ['class' => 'AdminController', 'method' => 'add']);
+
+    Router::POST('/admin/update-general-info/', ['class' => 'ApiController', 'method' => 'updateGeneralInfo']);
+    Router::POST('/admin/create-field/', ['class' => 'ApiController', 'method' => 'createField']);
+    Router::POST('/admin/add-data/', ['class' => 'ApiController', 'method' => 'addData']);
+    Router::POST('/admin/update-data/', ['class' => 'ApiController', 'method' => 'update']);
 ?>

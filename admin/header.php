@@ -26,12 +26,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/create-field" class="nav-link align-middle px-0">
+                        <a href="/admin/create/" class="nav-link align-middle px-0">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Создание полей</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/add-data" class="nav-link align-middle px-0">
+                        <a href="/admin/add-data/" class="nav-link align-middle px-0">
                             <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Добавление данных</span>
                         </a>
                     </li>

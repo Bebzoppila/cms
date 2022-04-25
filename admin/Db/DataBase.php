@@ -21,5 +21,10 @@ class DataBase
         $sth->execute($params);
         return $sth;
     }
+
+    public function getLastId(){
+        return $this->db->lastInsertId();
+    }
+
 //
 }

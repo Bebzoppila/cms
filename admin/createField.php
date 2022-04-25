@@ -2,22 +2,22 @@
     include_once 'admin/header.php';
     include_once 'admin/Db/DataBase.php';
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $sql = "CREATE TABLE `$_POST[tableName]`(";
-            unset($_POST['tableName']);
-            $sql .= "`id` INT(11) NOT NULL AUTO_INCREMENT,";
-            foreach ($_POST as $key => $value){
-                if($value[1] == 'IMG'){
-                    $sql .= "`$value[0]` VARCHAR(255) NOT NULL,";
-                    continue;
-                }
-                $sql .= "`$value[0]` $value[1] NOT NULL,";
-            }
-
-            $sql = $sql . ' PRIMARY KEY (`id`))  ENGINE = InnoDB;';
-            $db = new DataBase();
-            $db->sthExecute($sql);
-        }
+//        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+//            $sql = "CREATE TABLE `$_POST[tableName]`(";
+//            unset($_POST['tableName']);
+//            $sql .= "`id` INT(11) NOT NULL AUTO_INCREMENT,";
+//            foreach ($_POST as $key => $value){
+//                if($value[1] == 'IMG'){
+//                    $sql .= "`$value[0]` VARCHAR(255) NOT NULL,";
+//                    continue;
+//                }
+//                $sql .= "`$value[0]` $value[1] NOT NULL,";
+//            }
+//
+//            $sql = $sql . ' PRIMARY KEY (`id`))  ENGINE = InnoDB;';
+//            $db = new DataBase();
+//            $db->sthExecute($sql);
+//        }
 ?>
 
 
@@ -123,6 +123,16 @@ $allTypes = ['INT' => 'Целочисленное число',
         option.textContent = text
         return option
     }
+
+    const form = document.querySelector('form')
+    form.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        fetch('http://adminka:81/admin/create-field/',{
+            method: 'POST',
+            body: new FormData(form)
+        })
+    })
 
 </script>
 <?php

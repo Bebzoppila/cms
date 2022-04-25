@@ -4,21 +4,14 @@
     include_once 'admin/useful/Files.php';
     $db = new DataBase();
     $allInformation = $db->queryOne('SELECT * FROM `general-information`');
-    $uploadFile = 'images/logo.jpg';
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        if(Files::loadFile('logo', 'logo.jpg')){
-            $phone = $_POST['phone'];
-            $email = $_POST['email'];
-            $allInformation = array_merge($allInformation, $_POST);
-            $db->sthExecute("UPDATE `general-information`
-                    SET logo = 'images/logo.jpg',
-                    phone = '$phone',
-                    email = '$email'
-                    WHERE `general-information`.id = 1");
-        };
-    }
 ?>
         <div class="col py-3">
+            <?php
+//                echo '<pre>';
+////            REQUEST_URI
+//                    print_r($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+//                echo '<pre>';
+            ?>
             <h2>Общая информация</h2>
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
@@ -56,6 +49,18 @@
                 <button type="submit" class="btn btn-primary mt-2">Применить изменения</button>
             </form>
         </div>
+
+    <script>
+        const form = document.querySelector('form')
+        form.addEventListener('submit', (event) => {
+            event.preventDefault()
+            fetch('http://adminka:81/admin/update-general-info/', {
+                method: 'POST',
+                body: new FormData(form)
+            })
+        })
+
+    </script>
 <?php
     require_once 'admin/footer.php';
 ?>

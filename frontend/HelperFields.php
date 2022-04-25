@@ -16,7 +16,7 @@ class HelperFields
 
     public static function getAllFieldData($fieldName){
         $db = new DataBase();
-        print_r($fieldName);
+//        print_r($fieldName);
         return $db->queryAll("SELECT * FROM `$fieldName`");
     }
 }
